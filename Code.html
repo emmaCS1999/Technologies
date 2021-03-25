@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+ <html lang="eng">
+
+<head>
+    </div>
+    <title> Health pals </title>
+    <link rel="stylesheet" href="style.css">  
+    <link rel="sensor" href="server.mjs"> 
+
+  </head>
+  <body>
+    <div class="header">        
+                <h1>Remote Health Tracker</h1>
+    </div>
+    
+   
+   
+   <div class="row">
+       <div class="column">
+          <h2>Personalise you mat</h2>
+      <p>Here you can personalise your bathmat
+        <ul>
+            <li>Shower duration</li>         <!-- With more time these would be developed and persoanlised for the user on the app -->
+            <li>Alert sound</li>          
+            <li>Alert colour</li>
+            <li>Family contact</li>
+
+        </ul>
+                    
+    </p>
+   </div>
+
+   <div class="row"> <div class="column">
+        <h2>Todays Alert</h2>
+        <p> 
+            <ul>
+                <li>This alert will be triggered if the shower time exceeds 20 minutes </li>
+                <li>The users location is: </li>
+        </ul>
+        <button onclick="getLocation()">Locate from IP Address</button>
+        <p id="location"></p>                                                   <!--If need to provide location to emergency services may be useful, code refernce:https://www.w3schools.com/html/html5_geolocation.asp-->
+        <script>var x = document.getElementById("location");         
+            function getLocation() {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+              }
+            }
+            
+            function showPosition(position) {
+              x.innerHTML = "Latitude: " + position.coords.latitude +
+              "<br>Longitude: " + position.coords.longitude;
+            }
+        </script>
+    </p> 
+         <ul id="duration"></ul>
+        <script>
+           const ul = document.getElementById('duration');
+           const url= 'server.mjs';
+            fetch(url)
+             .then(response => response.json())
+             .then(data => {
+                 console.log(data.duration)
+                 document.querySelector("duration").innerText = data.duration })
+                if (data.duration > 100000) alert("Help required");
+
+                  
+         </script>
+        
+  </div>
+
+</body>
+
+<body>
+    <div class="row"> <div class="column"> 
+    <h2>Emergency contact</h2>
+    <p> In an <strong> Emergency </strong> click this button:</p>
+    <button id="myButton">999</button>
+    <script>
+      //  <a href="tel:0788"> 999 </a>     A direct route to 999 would be added
+        document.getElementById("myButton").onclick = function () {
+            alert("Emergency services on their way");
+        }
+    </script>
+    </div>
+</body>
+
+<body>
+    <div class="row"> <div class="column">             <!-- To enable geenral advice for the carers/family -->
+        <h2>Help and Advice </h2>
+        <p>Below presents a link to all NHS resources to help you care for the person in your life:
+        <a href= "https://www.england.nhs.uk/ourwork/clinical-policy/older-people/improving-care-for-older-people/">NHS Website </a> </p>
+    </div>
+    <script type="text/javascript">
+      window.onload = function(){ 
+     alert("Assitance required"); }
+      </script>    
+  </body>
+
+    </html>
